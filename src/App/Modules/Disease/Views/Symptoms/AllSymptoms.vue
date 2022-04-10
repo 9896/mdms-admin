@@ -64,12 +64,12 @@
             class="btn btn-tooltip"
             data-toggle="tooltip"
             data-placement="top"
-            title="Edit"
+            title="Track Symptom"
             data-container="body"
             data-animation="true"
-            :to="{ name: 'EditSymptom', params: { uuid: item.uuid } }"
+            :to="{ name: 'TrackSymptom', params: { uuid: item.uuid } }"
           >
-            <i class="fas fa-edit"></i>
+            <i class="fas fa-assistive-listening-systems"></i>
           </router-link>
         </div>
       </template>

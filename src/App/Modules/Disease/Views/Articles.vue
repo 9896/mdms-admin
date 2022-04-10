@@ -105,8 +105,10 @@ export default {
         onCancel: this.cancelled,
       });
       //get-all for diseases
+      //let url = "task/task1";
+      let url = "disease/admin/diseases/get-all";
       this.$axios
-        .get("disease/admin/diseases/get-all", {
+        .get(url, {
           params: {
             page: this.page,
           },

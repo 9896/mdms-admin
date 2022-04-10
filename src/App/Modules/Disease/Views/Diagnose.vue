@@ -130,7 +130,8 @@ export default {
         //canCancel: true,
         onCancel: this.cancelled,
       });
-      let url = "disease/diseases/get-disease-by-symptoms";
+      
+      let url = "disease/admin/diseases/get-disease-by-symptoms";
       this.$axios
         .post(url, {
           symptom: this.diseaseSymptoms,

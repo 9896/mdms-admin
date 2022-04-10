@@ -72,7 +72,7 @@
       </div>
 
       <!-- Link symptoms field -->
-      <label for="link-symptom">Search Disease By Symptoms (Diagnose)</label>
+      <label for="link-symptom">Link Symptoms</label>
       <v-autocomplete
         :items="symptoms"
         v-model="disease.symptoms"

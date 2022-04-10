@@ -31,7 +31,7 @@
 
       <!--Prevelance rate field  -->
       <div class="form-group">
-        <label for="prevelance-rate">Edit Prevalence Rate</label>
+        <label for="prevelance-rate">Prevalence Rate</label>
         <input
           v-model="disease.prevelance_rate"
           type="digit"
@@ -49,7 +49,7 @@
 
       <!-- Age start field -->
       <div class="form-group">
-        <label for="age-start">Edit Age start</label>
+        <label for="age-start">Age start</label>
         <input
           v-model="disease.age_start"
           type="digit"
@@ -61,7 +61,7 @@
 
       <!-- Age end field -->
       <div class="form-group">
-        <label for="age-end">Edit Age end</label>
+        <label for="age-end">Age end</label>
         <input
           v-model="disease.age_end"
           type="digit"
@@ -90,7 +90,7 @@
       </p>
 
       <!-- Disease classification field -->
-      <label for="link-classification">Link classifcations</label>
+      <!-- <label for="link-classification">Link classifcations</label>
       <v-autocomplete
         :items="classifications"
         v-model="disease.disease_classifications"
@@ -102,11 +102,11 @@
         multiple
         solo
         label="Link Classification"
-      ></v-autocomplete>
+      ></v-autocomplete> -->
 
       <!-- Disease category field -->
       <label for="link-category">Link Categories</label>
-      <v-autocomplete
+      <!-- <v-autocomplete
         :items="categories"
         v-model="disease.disease_categories"
         item-text="name"
@@ -116,7 +116,7 @@
         multiple
         solo
         label="Link Category"
-      ></v-autocomplete>
+      ></v-autocomplete> -->
 
       <button class="btn btn-primary" @click="createDisease">Create</button>
     </form>
@@ -225,7 +225,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          console.log(error.response.data.errors);
+          //console.log(error.response.data.errors);
           //if (error.response.data.errors.name) {
           this.errorResponse = error.response.data.errors;
           console.log("serverResponse:");

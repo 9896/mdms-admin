@@ -44,6 +44,13 @@
               </div>
               <div class="card-body px-lg-5 py-lg-5">
                 <form role="form" class="sign-in-form">
+                  <!-- CombinationError -->
+                  <small
+                    class="form-text text-danger"
+                    v-if="combinationError"
+                  >
+                    {{ combinationError }}
+                  </small>
                   <div class="form-group mb-3">
                     <div
                       class="
@@ -120,6 +127,7 @@
                     </button>
                   </div>
                 </form>
+               
               </div>
             </div>
           </div>
@@ -138,10 +146,11 @@ export default {
   data() {
     return {
       loginData: {
-        email: "ykeebler@example.com",
+        email: "kari.muller@example.org",
         password: "12345678",
       },
       formError: [],
+      combinationError: false,
       loader: "spinner",
       rep: "",
     };
@@ -153,30 +162,40 @@ export default {
   methods: {
     logIn() {
       //console.log("LoginData : "+this.email +" "+ this.password);
-      let loader = this.$loading.show({
+      let progress = this.$loading.show({
         loader: this.loader,
       });
-
+      this.combinationError = false
       this.formError = [];
       this.$axios
         .post("/authentication/admins/login", this.loginData)
         .then((response) => {
+          console.log(response);
+          if (response.data[0].message) {
+            this.combinationError = response.data[0].message;
+          }
+          console.log("CombeError: " + response.data[0].message);
           let token = response.data[0].access_token;
+          
           if (token) {
             this.$store.dispatch("set_token", token);
             this.setUserDetails("/admin/me");
             this.$router.push({ name: "Home" });
           }
         })
-        .catch((err) => {
-          if (err.response) {
-            if (err.response.data.errors !== undefined) {
-              this.formError = err.response.data.errors;
-            }
-          }
-          console.log("blah:" + err);
+        .catch((error) => {
+          console.log("From Upper section of catch:" + error);
+          //if (err.response) {
+          // if (err.response.data.errors !== undefined) {
+          this.formError = error.response.data.errors;
+          // }
+          //}
+          console.log("From Login Catch Error:" + this.formError);
         })
-        .finally(() => loader.hide());
+        .finally(() => {
+          progress.hide();
+          console.log("hehe From FInal" + this.formError);
+        });
     },
   },
 

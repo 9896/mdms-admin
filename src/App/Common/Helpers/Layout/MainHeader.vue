@@ -9,30 +9,40 @@
           <div class="col-xl-3 col-md-6">
             <div class="card card-stats">
               <!-- Card body -->
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">
-                      Doctors 
-                    </h5>
-                    <span class="h2 font-weight-bold mb-0">{{doctors}}</span>
-                  </div>
-                  <div class="col-auto">
-                    <div
-                      class="
-                        icon icon-shape
-                        bg-gradient-red
-                        text-white
-                        rounded-circle
-                        shadow
-                      "
-                    >
-                      <i class="ni ni-active-40"></i>
+              <router-link :to="{ name: 'DoctorPermissions' }">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">
+                        Doctors
+                      </h5>
+
+                      <span class="h2 font-weight-bold mb-0">{{
+                        doctors
+                      }}</span>
+                      <v-progress-circular
+                        v-if="!info"
+                        indeterminate
+                        color="primary"
+                      >
+                      </v-progress-circular>
+                    </div>
+                    <div class="col-auto">
+                      <div
+                        class="
+                          icon icon-shape
+                          bg-gradient-red
+                          text-white
+                          rounded-circle
+                          shadow
+                        "
+                      >
+                        <i class="ni ni-active-40"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-              </div>
+              </router-link>
             </div>
           </div>
           <div class="col-xl-3 col-md-6">
@@ -45,6 +55,12 @@
                       Users
                     </h5>
                     <span class="h2 font-weight-bold mb-0">{{ users }}</span>
+                    <v-progress-circular
+                      v-if="!info"
+                      indeterminate
+                      color="primary"
+                    >
+                    </v-progress-circular>
                   </div>
                   <div class="col-auto">
                     <div
@@ -60,66 +76,84 @@
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6">
             <div class="card card-stats">
               <!-- Card body -->
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">
-                      Symptoms
-                    </h5>
-                    <span class="h2 font-weight-bold mb-0">{{ symptoms }}</span>
-                  </div>
-                  <div class="col-auto">
-                    <div
-                      class="
-                        icon icon-shape
-                        bg-gradient-green
-                        text-white
-                        rounded-circle
-                        shadow
-                      "
-                    >
-                      <i class="ni ni-money-coins"></i>
+              <router-link :to="{ name: 'AllSymptoms' }">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">
+                        Symptoms
+                      </h5>
+
+                      <span class="h2 font-weight-bold mb-0">{{
+                        symptoms
+                      }}</span>
+                      <v-progress-circular
+                        v-if="!info"
+                        indeterminate
+                        color="primary"
+                      >
+                      </v-progress-circular>
+                    </div>
+                    <div class="col-auto">
+                      <div
+                        class="
+                          icon icon-shape
+                          bg-gradient-green
+                          text-white
+                          rounded-circle
+                          shadow
+                        "
+                      >
+                        <i class="ni ni-money-coins"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-              </div>
+              </router-link>
             </div>
           </div>
           <div class="col-xl-3 col-md-6">
             <div class="card card-stats">
               <!-- Card body -->
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">
-                      Diseases
-                    </h5>
-                    <span class="h2 font-weight-bold mb-0">{{ diseases }}</span>
-                  </div>
-                  <div class="col-auto">
-                    <div
-                      class="
-                        icon icon-shape
-                        bg-gradient-info
-                        text-white
-                        rounded-circle
-                        shadow
-                      "
-                    >
-                      <i class="ni ni-chart-bar-32"></i>
+              <router-link :to="{ name: 'AllDiseases' }">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">
+                        Diseases
+                      </h5>
+                      <span class="h2 font-weight-bold mb-0">{{
+                        diseases
+                      }}</span>
+                      <v-progress-circular
+                        v-if="!info"
+                        indeterminate
+                        color="primary"
+                      >
+                      </v-progress-circular>
+                    </div>
+                    <div class="col-auto">
+                      <div
+                        class="
+                          icon icon-shape
+                          bg-gradient-info
+                          text-white
+                          rounded-circle
+                          shadow
+                        "
+                      >
+                        <i class="ni ni-chart-bar-32"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-              </div>
+              </router-link>
             </div>
           </div>
         </div>
@@ -140,11 +174,12 @@ export default {
    */
   data() {
     return {
-      doctors: '',
-      users:'',
-      symptoms:'',
-      diseases:'',
-    }
+      doctors: "",
+      users: "",
+      symptoms: "",
+      diseases: "",
+      info: false,
+    };
   },
 
   /**
@@ -162,6 +197,7 @@ export default {
           this.users = response.data.users;
           this.symptoms = response.data.symptoms;
           this.diseases = response.data.diseases;
+          this.info = true;
         })
         .catch((error) => {
           console.log(error);

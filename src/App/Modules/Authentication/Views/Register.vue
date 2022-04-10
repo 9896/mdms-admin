@@ -41,7 +41,7 @@
               <div class="card bg-secondary border-0">
                 <div class="card-header bg-transparent pb-5">
                   <div class="text-muted text-center mt-2 mb-4">
-                    <small>Sign up</small>
+                    <small>Create Account</small>
                   </div>
                 </div>
                 <div class="card-body px-lg-5 py-lg-5">
@@ -59,12 +59,68 @@
                           ></span>
                         </div>
                         <input
+                          v-model="registrationData.first_name"
                           class="form-control"
-                          placeholder="Name"
+                          placeholder="First Name"
                           type="text"
                         />
                       </div>
                     </div>
+                    <p
+                      v-if="errorResponse.first_name"
+                      class="text-danger font-weight-light"
+                    >
+                      {{ errorResponse.first_name[0] }}
+                    </p>
+
+                    <div class="form-group">
+                      <div
+                        class="
+                          input-group input-group-merge input-group-alternative
+                          mb-3
+                        "
+                      >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"
+                            ><i class="ni ni-hat-3"></i
+                          ></span>
+                        </div>
+                        <input
+                          v-model="registrationData.last_name"
+                          class="form-control"
+                          placeholder="Last Name"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <p
+                      v-if="errorResponse.last_name"
+                      class="text-danger font-weight-light"
+                    >
+                      {{ errorResponse.last_name[0] }}
+                    </p>
+
+                    <div class="form-group">
+                      <div
+                        class="
+                          input-group input-group-merge input-group-alternative
+                          mb-3
+                        "
+                      >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"
+                            ><i class="ni ni-hat-3"></i
+                          ></span>
+                        </div>
+                        <input
+                          v-model="registrationData.phone_number"
+                          class="form-control"
+                          placeholder="Phone Number"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+
                     <div class="form-group">
                       <div
                         class="
@@ -78,12 +134,20 @@
                           ></span>
                         </div>
                         <input
+                          v-model="registrationData.email"
                           class="form-control"
                           placeholder="Email"
                           type="email"
                         />
                       </div>
                     </div>
+                    <p
+                      v-if="errorResponse.email"
+                      class="text-danger font-weight-light"
+                    >
+                      {{ errorResponse.email[0] }}
+                    </p>
+
                     <div class="form-group">
                       <div
                         class="
@@ -96,12 +160,45 @@
                           ></span>
                         </div>
                         <input
+                          v-model="registrationData.password"
                           class="form-control"
                           placeholder="Password"
                           type="password"
                         />
                       </div>
                     </div>
+                    <p
+                      v-if="errorResponse.password"
+                      class="text-danger font-weight-light"
+                    >
+                      {{ errorResponse.password[0] }}
+                    </p>
+
+                    <div class="form-group">
+                      <div
+                        class="
+                          input-group input-group-merge input-group-alternative
+                        "
+                      >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"
+                            ><i class="ni ni-lock-circle-open"></i
+                          ></span>
+                        </div>
+                        <input
+                          v-model="registrationData.confirmPassword"
+                          class="form-control"
+                          placeholder="Confirm Password"
+                          type="password"
+                        />
+                      </div>
+                    </div>
+                    <p
+                      v-if="confirmPassword"
+                      class="text-danger font-weight-light"
+                    >
+                      {{ confirmPassword }}
+                    </p>
 
                     <div class="row my-4">
                       <div class="col-12">
@@ -130,7 +227,18 @@
                       </div>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-primary mt-4">
+                      <span>
+                        <router-link :to="{ name: 'Login' }" class="nav-link">
+                          <span class="nav-link-inner--text"
+                            >Already a member? Login</span
+                          >
+                        </router-link>
+                      </span>
+                      <button
+                        type="button"
+                        class="btn btn-primary mt-4"
+                        @click="registerUser"
+                      >
                         Create account
                       </button>
                     </div>
@@ -152,6 +260,93 @@ export default {
   name: "Register",
   components: {
     AuthLayout,
+  },
+  /**
+   * data
+   */
+  data() {
+    return {
+      registrationData: {
+        first_name: "a",
+        last_name: "b",
+        password: "",
+        confirmPassword: "",
+        phone_number: 654321,
+        email: "g@gmail.com",
+      },
+      formError: [],
+      loader: "spinner",
+      rep: "",
+      successResponse: false,
+      errorResponse: false,
+      confirmPassword: false,
+    };
+  },
+
+  /**
+   * methods
+   */
+  methods: {
+    /**
+     * Create symptom
+     *
+     * @param { null }
+     * @return { null }
+     */
+    registerUser() {
+      this.confirmPassword = false;
+      this.errorResponse = false;
+      if (
+        this.registrationData.password != this.registrationData.confirmPassword
+      ) {
+        this.confirmPassword = "Please ensure that the passwords match";
+        return;
+      }
+      let symptomContainer = this.$refs.symptomContainer;
+      let loader = this.$loading.show({
+        container: symptomContainer,
+        //isFullPage: false,
+        loader: this.loader,
+        //canCancel: true,
+        onCancel: this.cancelled,
+      });
+      console.log(
+        this.registrationData.firstName +
+          this.registrationData.lastName +
+          this.registrationData.email +
+          this.registrationData.phoneNumber +
+          this.registrationData.password
+      );
+
+      let url = "doctor/doctors/store-doctor";
+      this.$axios
+        .post(url, this.registrationData)
+        .then((response) => {
+          this.successResponse = response.data;
+          this.successAlertDisplay();
+        })
+        .catch((error) => {
+          console.log(error);
+          //console.log(error.response.data.errors);
+          //if (error.response.data.errors.name) {
+          this.errorResponse = error.response.data.errors;
+          //this.errorAlertDisplay(this.errorResponse);
+          //}
+        })
+        .finally(() => loader.hide());
+    },
+
+    successAlertDisplay() {
+      this.$swal(
+        "Creation Successfull",
+        "Account Created successfully, Visit Login Page",
+        "success"
+      );
+    },
+
+    errorAlertDisplay(error) {
+      this.$swal("Error", error, "error");
+    },
   },
 };
 </script>

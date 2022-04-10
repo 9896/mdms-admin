@@ -65,11 +65,11 @@
                 <span class="nav-link-inner--text">Login</span>
               </router-link>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link :to="{ name: 'Register' }" class="nav-link">
                 <span class="nav-link-inner--text">Register</span>
               </router-link>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
