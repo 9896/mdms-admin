@@ -8,3 +8,5 @@ export { default as EditTrackedSymptom } from "./EditTrackedSymptom"
 export { default as CreateDoctor } from "./CreateDoctor"
 export { default as DoctorPermissions } from "./DoctorPermissions"   
 export { default as Contact } from "./Contact"
+export { default as Profile } from "./Profile"
+

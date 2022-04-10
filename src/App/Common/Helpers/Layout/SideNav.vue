@@ -133,6 +133,12 @@
               >
             </li>
             <li class="nav-item">
+              <router-link :to="{ name: 'Profile' }" class="nav-link">
+                <i class="fa-solid fa-user" aria-hidden="true"></i>
+                <span class="nav-link-text">Profile</span></router-link
+              >
+            </li>
+            <li class="nav-item">
               <router-link :to="{ name: 'Contact' }" class="nav-link">
                 <i class="fas fa-id-card" aria-hidden="true"></i>
                 <span class="nav-link-text">Contact Us</span></router-link
