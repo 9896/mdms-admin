@@ -26,9 +26,9 @@
         <div class="row">
           <div class="col">
             <slot name="content"
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
-              dicta blanditiis velit consequuntur vel corporis  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati, sed ea explicabo impedit temporibus voluptatum nostrum tenetur enim ab neque deleniti officiis id placeat quae, ex molestias numquam tempora atque.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, ipsum iure? Maiores cumque tenetur eius at placeat! Placeat magnam, autem in, natus aperiam laborum molestiae non voluptatibus aliquam veniam rem. </slot
+              >Welcome to Medical Diagnosis Management System (MDMS). It is our greatest
+              desire to offer near-accurate data on medical topics. Our users are important
+              to us. Proceed with the system resource managment with vigour and enthusiasm </slot
             >
           </div>
         </div>

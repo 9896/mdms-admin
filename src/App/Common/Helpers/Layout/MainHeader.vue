@@ -37,7 +37,7 @@
                           shadow
                         "
                       >
-                        <i class="ni ni-active-40"></i>
+                        <i class="fa fa-user-md" aria-hidden="true"></i>
                       </div>
                     </div>
                   </div>
@@ -72,7 +72,7 @@
                         shadow
                       "
                     >
-                      <i class="ni ni-chart-pie-35"></i>
+                      <i class="fa fa-user" aria-hidden="true"></i>
                     </div>
                   </div>
                 </div>
@@ -110,7 +110,7 @@
                           shadow
                         "
                       >
-                        <i class="ni ni-money-coins"></i>
+                        <i class="fa fa-map-signs" aria-hidden="true"></i>
                       </div>
                     </div>
                   </div>
@@ -148,7 +148,7 @@
                           shadow
                         "
                       >
-                        <i class="ni ni-chart-bar-32"></i>
+                        <i class="fa fa-snowflake-o" aria-hidden="true"></i>
                       </div>
                     </div>
                   </div>
